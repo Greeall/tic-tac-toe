@@ -31,6 +31,7 @@ namespace first {
 			this->save_cell = 0;
 			this->how_cells = 9;
 			this->arr_of_cells = gcnew array<int>(9){1,2,3,4,5,6,7,8,9};
+			
 		}
 
 	protected:
@@ -66,9 +67,12 @@ namespace first {
 	private: int save_cell;
 	private:  int how_cells;
 	private: array<int>^ arr_of_cells;  
+	
 	private: int del;
-		 
+	private: int del1;
 	private: System::Windows::Forms::Button^  button11;
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::Label^  label3;
 
 
 
@@ -101,6 +105,8 @@ namespace first {
 			this->button10 = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->button11 = (gcnew System::Windows::Forms::Button());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// button1
@@ -212,11 +218,31 @@ namespace first {
 			this->button11->UseVisualStyleBackColor = true;
 			this->button11->Click += gcnew System::EventHandler(this, &MyForm::button11_Click);
 			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(218, 227);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(35, 13);
+			this->label2->TabIndex = 12;
+			this->label2->Text = L"label2";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(218, 118);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(35, 13);
+			this->label3->TabIndex = 13;
+			this->label3->Text = L"label3";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(285, 262);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->label2);
 			this->Controls->Add(this->button11);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button10);
@@ -238,48 +264,43 @@ namespace first {
 		}
 #pragma endregion
 
-	private: void pc_game(array<int>^ m){
-					 
-					
-
-			 }
-	
+			
 		private: void del_one_cell(int k)   //удалить необходимый элемент из массива
 			{
 				for (int i=k-1;i<how_cells-1;i++) {arr_of_cells[i]=arr_of_cells[i+1];}
-				//int f = 0;
-				//for(int i=0; i<how_cells-1;i++) {  f = f + arr_of_cells[i];}
-				//label1->Text = Convert::ToString(f);
 			}
 
 		private: void random_cell()  //выбрать оставшуюс€ пустую €чейку, удалить еЄ, уменьшить счечик оставшихс€ €чеек
 				 {
-					 
 					 srand (time(NULL));
-					 del = arr_of_cells[rand() % how_cells];
+					 del1 = rand() % how_cells;
+					 del = arr_of_cells[del1];
 					 del_one_cell(del);
 					 how_cells--;
 				 }
 
-		private: void switcher()
+		private: void switcher() //переключатель 
 				 {
+
+					 label3->Text = Convert::ToString(del1);
+					label2->Text = Convert::ToString(del);
 					switch(del)
 					{
-						case (1): button1->Text == x_i_o;
-						case (2): button2->Text == x_i_o;
-						case (3): button3->Text == x_i_o;
-						case (4): button4->Text == x_i_o;
-						case (5): button5->Text == x_i_o;
-						case (6): button6->Text == x_i_o;
-						case (7): button7->Text == x_i_o;
-						case (8): button8->Text == x_i_o;
-						case (9): button9->Text == x_i_o;
+						case (1): button1->Text = x_i_o; break;
+						case (2): button2->Text = x_i_o; break;
+						case (3): button3->Text = x_i_o; break;
+						case (4): button4->Text = x_i_o; break;
+						case (5): button5->Text = x_i_o; break;
+						case (6): button6->Text = x_i_o; break;
+						case (7): button7->Text = x_i_o; break;
+						case (8): button8->Text = x_i_o; break;
+						case (9): button9->Text = x_i_o; break;
 					}
 				 }
 
 	    private: void random_first_pc() //кто первый ходит: программа или человек
 			 {
-					 change_var();
+					 
 					 srand (time(NULL));
 					 int f_n_i_x = rand()%10;
 					 if(f_n_i_x < 5 ) {  first_player = 0;} 
@@ -368,20 +389,25 @@ namespace first {
 				 x_i_o = "";
 				 counter = 0;
 				 }
-
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
 			 }
 	
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 
 				 if(play_with_pc == 0)
-			 {
-				finish_game(button1);
-			 }
-			 else
-			 {
-				 pc_game(arr_of_cells);
-			 }
+					 {
+						finish_game(button1);
+					 }
+				else
+					 {
+				
+				  finish_game(button1);
+				 del_one_cell(1);
+				 how_cells--;
+				 change_var();
+				 random_cell();		    //выбираем €чейку и удал€ем из свободных
+				 switcher();
+					 }
 				 
 			 }
     private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -391,7 +417,13 @@ namespace first {
 			 }
 			 else
 			 {
-				// pc_game();
+				
+				  finish_game(button2);
+				 del_one_cell(2);
+				 how_cells--;
+				 change_var();
+				 random_cell();		    //выбираем €чейку и удал€ем из свободных
+				 switcher();
 			 }
 		 }
 	private: System::Void button10_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -406,7 +438,13 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 			 }
 			 else
 			 {
-				// pc_game();
+				 
+				 finish_game(button3);
+				 del_one_cell(3);
+				 how_cells--;
+				 change_var();
+				 random_cell();		    //выбираем €чейку и удал€ем из свободных
+				 switcher();
 			 }
 		 }
 private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -416,7 +454,13 @@ private: System::Void button4_Click(System::Object^  sender, System::EventArgs^ 
 			 }
 			 else
 			 {
-				// pc_game();
+				 
+				  finish_game(button4);
+				 del_one_cell(4);
+				 how_cells--;
+				 change_var();
+				 random_cell();		    //выбираем €чейку и удал€ем из свободных
+				 switcher();
 			 }
 		 }
 private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -426,7 +470,13 @@ private: System::Void button5_Click(System::Object^  sender, System::EventArgs^ 
 			 }
 			 else
 			 {
-				// pc_game();
+				
+				 finish_game(button5);
+				 del_one_cell(5);
+				 how_cells--;
+				 change_var();
+				 random_cell();		    //выбираем €чейку и удал€ем из свободных
+				 switcher();
 			 }
 		 }
 private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -436,7 +486,13 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 			 }
 			 else
 			 {
-				// pc_game();
+				
+				  finish_game(button6);
+				 del_one_cell(6);
+				 how_cells--;
+				 change_var();
+				 random_cell();		    //выбираем €чейку и удал€ем из свободных
+				 switcher();
 			 }
 		 }
 private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -446,7 +502,13 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 			 }
 			 else
 			 {
-				// pc_game();
+				 
+				 finish_game(button7);
+				 del_one_cell(7);
+				 how_cells--;
+				 change_var();
+				 random_cell();		    //выбираем €чейку и удал€ем из свободных
+				 switcher();
 			 }
 		 }
 private: System::Void button8_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -456,7 +518,13 @@ private: System::Void button8_Click(System::Object^  sender, System::EventArgs^ 
 			 }
 			 else
 			 {
-				// pc_game();
+				
+				 finish_game(button8);
+				 del_one_cell(8);
+				 how_cells--;
+				 change_var();
+				 random_cell();		    //выбираем €чейку и удал€ем из свободных
+				 switcher();
 			 }
 		 }
 private: System::Void button9_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -466,24 +534,34 @@ private: System::Void button9_Click(System::Object^  sender, System::EventArgs^ 
 			 }
 			 else
 			 {
-				// pc_game();
-				 
+				 finish_game(button9);
+				 del_one_cell(9);
+				 how_cells--;
+				 change_var();
+				 random_cell();		    //выбираем €чейку и удал€ем из свободных
+				 switcher();
 			 }
 		 }
 
 private: System::Void button11_Click(System::Object^  sender, System::EventArgs^  e) {
 
+			 
+			 arr_of_cells = gcnew array<int>(9){1,2,3,4,5,6,7,8,9};
 			 play_with_pc = 1;
+			 how_cells = 9;
 			 restart();
-			// random_first_pc();
-			// if(first_player == 1)		//1 - компьютер начинает игру. крестик или нолик это - инфа уже есть. 
-			// {
-				 random_cell();		    //выбираем €чейку и удал€ем из свободных
-				// switcher();			//заполн€ем €чейку значением 
-				// change_var();		    //мен€ем значок 
+			 random_first_pc();
+			
+			 if(first_player == 1)		//1 - компьютер начинает игру. крестик или нолик это - инфа уже есть. 
+			 {
+				 random_cell();		//выбираем €чейку и удал€ем из свободных
+				 change_var();
+				 switcher();			//заполн€ем €чейку значением 
+				 //label3->Text= Convert::ToString(arr_of_cells[del]);
+				 //change_var();		    //мен€ем значок 
 										//должен теперь ходить человек
 										//находимс€ в режиме ожидани€ 
-			// }							//если выпадает 0, то находимс€ в режиме ожидани€
+			 }							//если выпадает 0, то находимс€ в режиме ожидани€
 		 }
 };
 }
