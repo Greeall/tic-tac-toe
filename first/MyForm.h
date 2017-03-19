@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <stdlib.h> 
 #include <ctime>
 #include <vector> 
@@ -28,7 +28,6 @@ namespace first {
             this->current_sign = "";
 			this->counter = 0;
 			this->game_with_pc = false;
-			this->save_cell = 0;
 			this->remaining_cells = 9;
 			this->array_of_cells = gcnew array<int>(9){1,2,3,4,5,6,7,8,9};
             this->init_first_sign();
@@ -238,15 +237,6 @@ namespace first {
 
 		}
 #pragma endregion
-<<<<<<< HEAD
-=======
-
-
-		private: void step_of_game(System::Windows::Forms::Button^ button, int number_of_delete_cell)
-				 {
-                    try_select_button(button);
-				 }
->>>>>>> 720d2aea89e5d3180abbfc1ef19ef0f8c70ab9b2
 			
 		private: void delete_one_cell(int button_remaining_index)
 				{
@@ -329,7 +319,7 @@ namespace first {
                         current_sign = "x";
         }
 	
-<<<<<<< HEAD
+
 		private: bool check_unfinished_game()
 				 {
 					 bool is_game_unfinished = label1->Text == "";
@@ -344,16 +334,6 @@ namespace first {
 						 bool is_it_finish = check_unfinished_game();
                          if (game_with_pc && is_it_finish)
                          select_random_cell();
-=======
-        private: void try_select_button(System::Windows::Forms::Button^ button) //÷òîáû íà çàíÿòóþ ÿ÷åéêó
-				 {                                                          // áîëüøå íå íàæèìàëè
-                     bool is_game_unfinished = label1->Text == "";
-                     if (is_game_unfinished && button->Text == "")
-					 {
-                         select_button(button);
-                         if (game_with_pc)
-                            select_random_cell();
->>>>>>> 720d2aea89e5d3180abbfc1ef19ef0f8c70ab9b2
 					 }
 				 }
 
@@ -363,29 +343,17 @@ namespace first {
                 counter++;
                 write_sign_on_button(button);
                 int button_number = convert_button_to_number(button);
-<<<<<<< HEAD
+
                 int button_remaining_index = convert_button_number_to_remaining_index(button_number);
-=======
-                int button_remaining_index = convet_button_number_to_remaining_index(button_number);
->>>>>>> 720d2aea89e5d3180abbfc1ef19ef0f8c70ab9b2
                 delete_one_cell(button_remaining_index);
 
                 check_win();
                 check_draw();
-<<<<<<< HEAD
+
         }
 
         private: int convert_button_number_to_remaining_index(int button_number)
-=======
 
-                label2->Text = "";
-                for (int x = 0; x < 9; x++) {
-                    label2->Text += array_of_cells[x];
-                }
-        }
-
-        private: int convet_button_number_to_remaining_index(int button_number)
->>>>>>> 720d2aea89e5d3180abbfc1ef19ef0f8c70ab9b2
         {
                 for (int i = 0; i < remaining_cells; i++)
                 {
@@ -396,11 +364,9 @@ namespace first {
                 }
         }
 
-<<<<<<< HEAD
+
 		private: void check_draw() {  
-=======
-		private: void check_draw() {  //ïðîâåðÿåì íà íè÷üþ
->>>>>>> 720d2aea89e5d3180abbfc1ef19ef0f8c70ab9b2
+
                      bool is_game_unfinished = label1->Text == "";
 					 if(counter == 9 && is_game_unfinished)
 					    label1->Text = "DRAW";
@@ -451,7 +417,7 @@ namespace first {
 			 }
 	
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-<<<<<<< HEAD
+
 				 try_select_button(button1);
 			 }
 
@@ -479,35 +445,8 @@ namespace first {
 		     }
     private: System::Void button9_Click(System::Object^  sender, System::EventArgs^  e) {
 			     try_select_button(button9);
-=======
-				 step_of_game(button1, 1);
-			 }
 
-    private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
-				 step_of_game(button2, 2);
-		    }
-
-    private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
-			     step_of_game(button3, 3);
-		     }
-    private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
-			     step_of_game(button4, 4);
-		     }
-    private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
-			     step_of_game(button5, 5);
-		     }
-    private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
-			     step_of_game(button6, 6);
-		     }
-    private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {
-			     step_of_game(button7, 7);
-		     }
-    private: System::Void button8_Click(System::Object^  sender, System::EventArgs^  e) {
-			     step_of_game(button8, 8);
-		     }
-    private: System::Void button9_Click(System::Object^  sender, System::EventArgs^  e) {
-			     step_of_game(button9, 9);
->>>>>>> 720d2aea89e5d3180abbfc1ef19ef0f8c70ab9b2
+			
 		     }
 
     private: System::Void button10_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -544,8 +483,4 @@ namespace first {
             }
         }
     };
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 720d2aea89e5d3180abbfc1ef19ef0f8c70ab9b2
