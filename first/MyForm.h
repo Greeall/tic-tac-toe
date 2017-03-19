@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <stdlib.h> 
 #include <ctime>
 #include <vector> 
@@ -484,4 +484,7 @@ namespace first {
         }
     };
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> d151eb57b21b89c3ef4259514418d55ba59dc6bd
