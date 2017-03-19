@@ -64,13 +64,8 @@ namespace first {
 	private: int counter;
 	private: bool game_with_pc;
     private: bool is_pc_first_player;
-<<<<<<< HEAD
 	private: int remaining_cells;
 	private: int level_game;
-=======
-	private: int save_cell;
-	private: int remaining_cells;
->>>>>>> 720d2aea89e5d3180abbfc1ef19ef0f8c70ab9b2
 	private: array<int>^ array_of_cells;  
 	private: System::Windows::Forms::Button^  button11;
 
