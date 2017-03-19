@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <stdlib.h> 
 #include <ctime>
 #include <vector> 
@@ -14,7 +14,7 @@ namespace first {
 	using namespace std;
 
 	/// <summary>
-	/// Сводка для MyForm
+	/// Г‘ГўГ®Г¤ГЄГ  Г¤Г«Гї MyForm
 	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
@@ -23,7 +23,7 @@ namespace first {
 		{
 			InitializeComponent();
 			//
-			//TODO: добавьте код конструктора
+			//TODO: Г¤Г®ГЎГ ГўГјГІГҐ ГЄГ®Г¤ ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°Г 
 			//
 			this->cross_or_zero = "";
 			this->counter = 0;
@@ -36,7 +36,7 @@ namespace first {
 
 	protected:
 		/// <summary>
-		/// Освободить все используемые ресурсы.
+		/// ГЋГ±ГўГ®ГЎГ®Г¤ГЁГІГј ГўГ±ГҐ ГЁГ±ГЇГ®Г«ГјГ§ГіГҐГ¬Г»ГҐ Г°ГҐГ±ГіГ°Г±Г» С‹РІС„С‹РІС‹
 		/// </summary>
 		~MyForm()
 		{
@@ -82,14 +82,14 @@ namespace first {
 
 	private:
 		/// <summary>
-		/// Требуется переменная конструктора.
+		/// Г’Г°ГҐГЎГіГҐГІГ±Гї ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г Гї ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°Г .
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Обязательный метод для поддержки конструктора - не изменяйте
-		/// содержимое данного метода при помощи редактора кода.
+		/// ГЋГЎГїГ§Г ГІГҐГ«ГјГ­Г»Г© Г¬ГҐГІГ®Г¤ Г¤Г«Гї ГЇГ®Г¤Г¤ГҐГ°Г¦ГЄГЁ ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°Г  - Г­ГҐ ГЁГ§Г¬ГҐГ­ГїГ©ГІГҐ
+		/// Г±Г®Г¤ГҐГ°Г¦ГЁГ¬Г®ГҐ Г¤Г Г­Г­Г®ГЈГ® Г¬ГҐГІГ®Г¤Г  ГЇГ°ГЁ ГЇГ®Г¬Г®Г№ГЁ Г°ГҐГ¤Г ГЄГІГ®Г°Г  ГЄГ®Г¤Г .
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -335,8 +335,8 @@ namespace first {
 					    }
 				 }
 	
-		private: void prevention_repeat_move(System::Windows::Forms::Button^ button) //чтобы на занятую ячейку
-				 {                                                          // больше не нажимали
+		private: void prevention_repeat_move(System::Windows::Forms::Button^ button) //Г·ГІГ®ГЎГ» Г­Г  Г§Г Г­ГїГІГіГѕ ГїГ·ГҐГ©ГЄГі
+				 {                                                          // ГЎГ®Г«ГјГёГҐ Г­ГҐ Г­Г Г¦ГЁГ¬Г Г«ГЁ
 					 if(button->Text == "")
 					 {
 						 change_var();
@@ -346,7 +346,7 @@ namespace first {
 					 }
 				 }
 
-		private: void draw() {  //проверяем на ничью
+		private: void draw() {  //ГЇГ°Г®ГўГҐГ°ГїГҐГ¬ Г­Г  Г­ГЁГ·ГјГѕ
 					 if(counter == 9 && label1->Text == "")
 					 {label1->Text = "DRAW";}
 				 }
@@ -415,7 +415,7 @@ namespace first {
 				 delete_one_cell(1);
 				 how_cells--;
 				 change_var();
-				 random_cell();		    //выбираем ячейку и удаляем из свободных
+				 random_cell();		    //ГўГ»ГЎГЁГ°Г ГҐГ¬ ГїГ·ГҐГ©ГЄГі ГЁ ГіГ¤Г Г«ГїГҐГ¬ ГЁГ§ Г±ГўГ®ГЎГ®Г¤Г­Г»Гµ
 				 switcher();
 					 }
 				 
@@ -432,7 +432,7 @@ namespace first {
 				 delete_one_cell(2);
 				 how_cells--;
 				 change_var();
-				 random_cell();		    //выбираем ячейку и удаляем из свободных
+				 random_cell();		    //ГўГ»ГЎГЁГ°Г ГҐГ¬ ГїГ·ГҐГ©ГЄГі ГЁ ГіГ¤Г Г«ГїГҐГ¬ ГЁГ§ Г±ГўГ®ГЎГ®Г¤Г­Г»Гµ
 				 switcher();
 			 }
 		 }
@@ -453,7 +453,7 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 				 delete_one_cell(3);
 				 how_cells--;
 				 change_var();
-				 random_cell();		    //выбираем ячейку и удаляем из свободных
+				 random_cell();		    //ГўГ»ГЎГЁГ°Г ГҐГ¬ ГїГ·ГҐГ©ГЄГі ГЁ ГіГ¤Г Г«ГїГҐГ¬ ГЁГ§ Г±ГўГ®ГЎГ®Г¤Г­Г»Гµ
 				 switcher();
 			 }
 		 }
@@ -469,7 +469,7 @@ private: System::Void button4_Click(System::Object^  sender, System::EventArgs^ 
 				 delete_one_cell(4);
 				 how_cells--;
 				 change_var();
-				 random_cell();		    //выбираем ячейку и удаляем из свободных
+				 random_cell();		    //ГўГ»ГЎГЁГ°Г ГҐГ¬ ГїГ·ГҐГ©ГЄГі ГЁ ГіГ¤Г Г«ГїГҐГ¬ ГЁГ§ Г±ГўГ®ГЎГ®Г¤Г­Г»Гµ
 				 switcher();
 			 }
 		 }
@@ -485,7 +485,7 @@ private: System::Void button5_Click(System::Object^  sender, System::EventArgs^ 
 				 delete_one_cell(5);
 				 how_cells--;
 				 change_var();
-				 random_cell();		    //выбираем ячейку и удаляем из свободных
+				 random_cell();		    //ГўГ»ГЎГЁГ°Г ГҐГ¬ ГїГ·ГҐГ©ГЄГі ГЁ ГіГ¤Г Г«ГїГҐГ¬ ГЁГ§ Г±ГўГ®ГЎГ®Г¤Г­Г»Гµ
 				 switcher();
 			 }
 		 }
@@ -501,7 +501,7 @@ private: System::Void button6_Click(System::Object^  sender, System::EventArgs^ 
 				 delete_one_cell(6);
 				 how_cells--;
 				 change_var();
-				 random_cell();		    //выбираем ячейку и удаляем из свободных
+				 random_cell();		    //ГўГ»ГЎГЁГ°Г ГҐГ¬ ГїГ·ГҐГ©ГЄГі ГЁ ГіГ¤Г Г«ГїГҐГ¬ ГЁГ§ Г±ГўГ®ГЎГ®Г¤Г­Г»Гµ
 				 switcher();
 			 }
 		 }
@@ -517,7 +517,7 @@ private: System::Void button7_Click(System::Object^  sender, System::EventArgs^ 
 				 delete_one_cell(7);
 				 how_cells--;
 				 change_var();
-				 random_cell();		    //выбираем ячейку и удаляем из свободных
+				 random_cell();		    //ГўГ»ГЎГЁГ°Г ГҐГ¬ ГїГ·ГҐГ©ГЄГі ГЁ ГіГ¤Г Г«ГїГҐГ¬ ГЁГ§ Г±ГўГ®ГЎГ®Г¤Г­Г»Гµ
 				 switcher();
 			 }
 		 }
@@ -533,7 +533,7 @@ private: System::Void button8_Click(System::Object^  sender, System::EventArgs^ 
 				 delete_one_cell(8);
 				 how_cells--;
 				 change_var();
-				 random_cell();		    //выбираем ячейку и удаляем из свободных
+				 random_cell();		    //ГўГ»ГЎГЁГ°Г ГҐГ¬ ГїГ·ГҐГ©ГЄГі ГЁ ГіГ¤Г Г«ГїГҐГ¬ ГЁГ§ Г±ГўГ®ГЎГ®Г¤Г­Г»Гµ
 				 switcher();
 			 }
 		 }
@@ -548,7 +548,7 @@ private: System::Void button9_Click(System::Object^  sender, System::EventArgs^ 
 				 delete_one_cell(9);
 				 how_cells--;
 				 change_var();
-				 random_cell();		    //выбираем ячейку и удаляем из свободных
+				 random_cell();		    //ГўГ»ГЎГЁГ°Г ГҐГ¬ ГїГ·ГҐГ©ГЄГі ГЁ ГіГ¤Г Г«ГїГҐГ¬ ГЁГ§ Г±ГўГ®ГЎГ®Г¤Г­Г»Гµ
 				 switcher();
 			 }
 		 }
