@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <stdlib.h> 
 #include <ctime>
 #include <vector> 
@@ -67,6 +67,10 @@ namespace first {
 	private: int level_game;
 	private: array<int>^ array_of_cells;  
 	private: System::Windows::Forms::Button^  button11;
+	private: System::Windows::Forms::Button^  button12;
+	private: System::Windows::Forms::Button^  button13;
+	private: System::Windows::Forms::Button^  button14;
+	private: System::Windows::Forms::Label^  label2;
 
 
 
@@ -101,6 +105,10 @@ namespace first {
 			this->button10 = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->button11 = (gcnew System::Windows::Forms::Button());
+			this->button12 = (gcnew System::Windows::Forms::Button());
+			this->button13 = (gcnew System::Windows::Forms::Button());
+			this->button14 = (gcnew System::Windows::Forms::Button());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// button1
@@ -212,11 +220,52 @@ namespace first {
 			this->button11->UseVisualStyleBackColor = true;
 			this->button11->Click += gcnew System::EventHandler(this, &MyForm::button11_Click);
 			// 
+			// button12
+			// 
+			this->button12->Location = System::Drawing::Point(178, 138);
+			this->button12->Name = L"button12";
+			this->button12->Size = System::Drawing::Size(75, 23);
+			this->button12->TabIndex = 12;
+			this->button12->Text = L"easy";
+			this->button12->UseVisualStyleBackColor = true;
+			// 
+			// button13
+			// 
+			this->button13->Location = System::Drawing::Point(178, 176);
+			this->button13->Name = L"button13";
+			this->button13->Size = System::Drawing::Size(75, 23);
+			this->button13->TabIndex = 13;
+			this->button13->Text = L"middle";
+			this->button13->UseVisualStyleBackColor = true;
+			this->button13->Click += gcnew System::EventHandler(this, &MyForm::button13_Click);
+			// 
+			// button14
+			// 
+			this->button14->Location = System::Drawing::Point(178, 214);
+			this->button14->Name = L"button14";
+			this->button14->Size = System::Drawing::Size(75, 23);
+			this->button14->TabIndex = 14;
+			this->button14->Text = L"hard";
+			this->button14->UseVisualStyleBackColor = true;
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(184, 107);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(60, 13);
+			this->label2->TabIndex = 15;
+			this->label2->Text = L"select level";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(285, 262);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->button14);
+			this->Controls->Add(this->button13);
+			this->Controls->Add(this->button12);
 			this->Controls->Add(this->button11);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button10);
@@ -331,8 +380,9 @@ namespace first {
                      if (is_it_finish && button->Text == "")
 					 {
                          select_button(button);
-						 bool is_it_finish = check_unfinished_game();
-                         if (game_with_pc && is_it_finish)
+						 bool is_it_not_finish = check_unfinished_game();
+						 //there is will make check about level 
+                         if (game_with_pc && is_it_not_finish)
                          select_random_cell();
 					 }
 				 }
@@ -413,6 +463,76 @@ namespace first {
 				 counter = 0;
 			}
 
+		private: void check_almost_ready_line(System::Windows::Forms::Button^ button){
+
+					 int number_button = convert_button_to_number(button);
+					 switch(number_button)
+					 {
+						 case (1):
+					 
+							if (button2->Text == button3->Text || button4->Text == button7->Text || button5->Text == button9->Text)
+							{
+								select_button(button);
+							};
+							break;
+					 	 
+						 case (2):
+							if (button1->Text == button3->Text || button5->Text == button8->Text)
+							{
+								select_button(button);
+							};
+							break;
+						 case (3):
+							if (button1->Text == button2->Text || button5->Text == button7->Text || button6->Text == button9->Text)
+							{
+								select_button(button);
+							};
+							break;
+						 case (4):
+							if (button1->Text == button7->Text || button5->Text == button6->Text)
+							{
+								select_button(button);
+							};
+							break;
+						 case (5):
+							if (button1->Text == button9->Text || button3->Text == button7->Text || button2->Text == button8->Text || button4->Text == button6->Text)
+							{
+								select_button(button);
+							};
+							break;
+						 case (6):
+							if (button3->Text == button9->Text || button4->Text == button5->Text)
+							{
+								select_button(button);
+							};
+							break;
+						 case (7):
+							if (button1->Text == button4->Text || button8->Text == button9->Text || button3->Text == button5->Text)
+							{
+								select_button(button);
+							};
+							break;
+					     case (8):
+							if (button8->Text == button9->Text || button2->Text == button5->Text)
+							{
+								select_button(button);
+							};
+							break;
+						 case (9):
+							if (button1->Text == button5->Text || button3->Text == button6->Text || button7->Text == button8->Text)
+							{
+								select_button(button);
+							};
+							break;
+					 }
+					 
+				 }
+
+
+	private: void play_with_middle_level(){
+
+			 }
+
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
 			 }
 	
@@ -456,8 +576,19 @@ namespace first {
 
     private: System::Void button11_Click(System::Object^  sender, System::EventArgs^  e) {
                  restart();
+				 level_game = 1;
                  initiate_pc_game();
 		    }
+
+	private: System::Void button13_Click(System::Object^  sender, System::EventArgs^  e) {
+				 level_game = 2; 
+			 }
+
+
+	private: void check_level(){
+
+			 }
+
 
     private: void initiate_pc_game() {
         array_of_cells = gcnew array<int>(9){ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -482,9 +613,7 @@ namespace first {
                 is_pc_first_player = true; 
             }
         }
-    };
+	
+};
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> d151eb57b21b89c3ef4259514418d55ba59dc6bd
