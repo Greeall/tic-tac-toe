@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <stdlib.h> 
 #include <ctime>
 #include <vector> 
@@ -14,7 +14,7 @@ namespace first {
 	using namespace std;
 
 	/// <summary>
-	/// Сводка для MyForm
+	/// Г‘ГўГ®Г¤ГЄГ  Г¤Г«Гї MyForm
 	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
@@ -23,20 +23,20 @@ namespace first {
 		{
 			InitializeComponent();
 			//
-			//TODO: добавьте код конструктора
+			//TODO: Г¤Г®ГЎГ ГўГјГІГҐ ГЄГ®Г¤ ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°Г 
 			//
-			this->cross_or_zero = "";
+            this->current_sign = "";
 			this->counter = 0;
-			this->play_with_pc = 0;
+			this->game_with_pc = false;
 			this->save_cell = 0;
 			this->remaining_cells = 9;
 			this->array_of_cells = gcnew array<int>(9){1,2,3,4,5,6,7,8,9};
-			
+            this->init_first_sign();
 		}
 
 	protected:
 		/// <summary>
-		/// Освободить все используемые ресурсы.
+		/// С‹РІС„С‹РІС‹
 		/// </summary>
 		~MyForm()
 		{
@@ -49,7 +49,7 @@ namespace first {
 	protected: 
 
 	protected: 
-	protected: System::String^ cross_or_zero;
+    protected: System::String^ current_sign;
 	private: System::Windows::Forms::Button^  button2;
 	protected: 
 	private: System::Windows::Forms::Button^  button3;
@@ -62,17 +62,14 @@ namespace first {
 	private: System::Windows::Forms::Button^  button10;
 	private: System::Windows::Forms::Label^  label1;
 	private: int counter;
-	private: int play_with_pc;
-	private: int first_player;
+	private: bool game_with_pc;
+    private: bool is_pc_first_player;
 	private: int save_cell;
-	private:  int remaining_cells;
+	private: int remaining_cells;
 	private: array<int>^ array_of_cells;  
-	
-	private: int del;
-	private: int del1;
 	private: System::Windows::Forms::Button^  button11;
-	private: System::Windows::Forms::Label^  label2;
-	private: System::Windows::Forms::Label^  label3;
+
+
 
 
 
@@ -82,14 +79,14 @@ namespace first {
 
 	private:
 		/// <summary>
-		/// Требуется переменная конструктора.
+		/// Г’Г°ГҐГЎГіГҐГІГ±Гї ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г Гї ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°Г .
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Обязательный метод для поддержки конструктора - не изменяйте
-		/// содержимое данного метода при помощи редактора кода.
+		/// ГЋГЎГїГ§Г ГІГҐГ«ГјГ­Г»Г© Г¬ГҐГІГ®Г¤ Г¤Г«Гї ГЇГ®Г¤Г¤ГҐГ°Г¦ГЄГЁ ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г°Г  - Г­ГҐ ГЁГ§Г¬ГҐГ­ГїГ©ГІГҐ
+		/// Г±Г®Г¤ГҐГ°Г¦ГЁГ¬Г®ГҐ Г¤Г Г­Г­Г®ГЈГ® Г¬ГҐГІГ®Г¤Г  ГЇГ°ГЁ ГЇГ®Г¬Г®Г№ГЁ Г°ГҐГ¤Г ГЄГІГ®Г°Г  ГЄГ®Г¤Г .
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -105,8 +102,6 @@ namespace first {
 			this->button10 = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->button11 = (gcnew System::Windows::Forms::Button());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// button1
@@ -218,31 +213,11 @@ namespace first {
 			this->button11->UseVisualStyleBackColor = true;
 			this->button11->Click += gcnew System::EventHandler(this, &MyForm::button11_Click);
 			// 
-			// label2
-			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(218, 227);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(35, 13);
-			this->label2->TabIndex = 12;
-			this->label2->Text = L"label2";
-			// 
-			// label3
-			// 
-			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(218, 118);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(35, 13);
-			this->label3->TabIndex = 13;
-			this->label3->Text = L"label3";
-			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(285, 262);
-			this->Controls->Add(this->label3);
-			this->Controls->Add(this->label2);
 			this->Controls->Add(this->button11);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button10);
@@ -263,100 +238,143 @@ namespace first {
 
 		}
 #pragma endregion
-
-
-		private: void step_of_game(System::Windows::Forms::Button^ button, int number_of_delete_cell)
-				 {
-					  if(play_with_pc == 0)
-						 {
-							finish_game(button);
-						 }
-					 else
-						 {
-							 finish_game(button);
-							 delete_one_cell(number_of_delete_cell);
-							 remaining_cells--;
-							 change_var();
-							 random_cell();		    
-							 switcher();
-						 }
-				 }
 			
-		private: void delete_one_cell(int k)
+		private: void delete_one_cell(int button_remaining_index)
 				{
-					for (int i=k;i<remaining_cells;i++) {array_of_cells[i]=array_of_cells[i+1];}
+                    for (int i = button_remaining_index; i<remaining_cells - 1; i++)
+                    {
+                        array_of_cells[i] = array_of_cells[i+1];
+                    }
+                    remaining_cells--;
 				}
 
-		private: void random_cell()  
+        private: void select_random_cell()
 				 {
-					 srand (time(NULL));
-					 del = rand() % remaining_cells;
-					 delete_one_cell(del);
-					 remaining_cells--;
+					 srand(time(NULL));
+					 int random_cell = rand() % remaining_cells;
+                     System::Windows::Forms::Button^ random_button = convert_button_remaining_index_to_button(random_cell);
+                     select_button(random_button);
 				 }
 
-		private: void switcher() 
+        private: void write_sign_on_button(System::Windows::Forms::Button^ button)
 				 {
-					switch(del)
-					{
-						case (1): button1->Text = cross_or_zero; break;
-						case (2): button2->Text = cross_or_zero; break;
-						case (3): button3->Text = cross_or_zero; break;
-						case (4): button4->Text = cross_or_zero; break;
-						case (5): button5->Text = cross_or_zero; break;
-						case (6): button6->Text = cross_or_zero; break;
-						case (7): button7->Text = cross_or_zero; break;
-						case (8): button8->Text = cross_or_zero; break;
-						case (9): button9->Text = cross_or_zero; break;
-					}
+                     button->Text = current_sign;
 				 }
 
-	    private: void random_first_pc() 
-			 { 
-					 srand (time(NULL));
-					 int i = rand()%10;
-					 if(i < 5 ) {  first_player = 0;} 
-					 else {  first_player = 1;} 
-			 }
-		
+        private: System::Windows::Forms::Button^ convert_button_remaining_index_to_button(int button_remaining_index)
+        {
+                     System::Windows::Forms::Button^ button;
+                     int button_number = array_of_cells[button_remaining_index];
+                     switch (button_number)
+                     {
+                         case (1) : button = button1; break;
+                         case (2) : button = button2; break;
+                         case (3) : button = button3; break;
+                         case (4) : button = button4; break;
+                         case (5) : button = button5; break;
+                         case (6) : button = button6; break;
+                         case (7) : button = button7; break;
+                         case (8) : button = button8; break;
+                         case (9) : button = button9; break;
+                     }
 
+                     return button;
+        }
 
-		private: void change_var()
-				 {					
-					 srand (time(NULL));
-					 int i = rand()%10;
+        private: int convert_button_to_number(System::Windows::Forms::Button^ button)
+        {
+                     if (button == button1)
+                         return 1;
+                     else if (button == button2)
+                         return 2;
+                     else if (button == button3)
+                         return 3;
+                     else if (button == button4)
+                         return 4;
+                     else if (button == button5)
+                         return 5;
+                     else if (button == button6)
+                         return 6;
+                     else if (button == button7)
+                         return 7;
+                     else if (button == button8)
+                         return 8;
+                     else if (button == button9)
+                         return 9;
+        }
 
-					 if(i < 5 && cross_or_zero == "") { cross_or_zero = "o";} 
-					 else if(cross_or_zero == "" && i >= 5) {cross_or_zero = "x";} 
-					 else
-						{
-								 if(cross_or_zero == "x") {cross_or_zero="o";}
-								 else {cross_or_zero="x";}
-					    }
-				 }
+        private: void init_first_sign()
+        {
+                     srand(time(NULL));
+                     if (rand() % 2)
+                         current_sign = "o";
+                     else
+                         current_sign = "x";
+        }
+
+        private: void toggle_sign()
+        { 
+				    if(current_sign == "x") 
+                        current_sign = "o";
+				    else 
+                        current_sign = "x";
+        }
 	
-		private: void prevention_repeat_move(System::Windows::Forms::Button^ button) //чтобы на занятую ячейку
-				 {                                                          // больше не нажимали
-					 if(button->Text == "")
+		private: bool check_unfinished_game()
+				 {
+					 bool is_game_unfinished = label1->Text == "";
+					 return is_game_unfinished;
+				 }
+        private: void try_select_button(System::Windows::Forms::Button^ button) 
+				 {                                                          
+                     bool is_it_finish = check_unfinished_game();
+                     if (is_it_finish && button->Text == "")
 					 {
-						 change_var();
-						 button->Text = cross_or_zero;
-						 counter++; 
-						 draw();
+                         select_button(button);
+						 bool is_it_finish = check_unfinished_game();
+                         if (game_with_pc && is_it_finish)
+                         select_random_cell();
 					 }
 				 }
 
-		private: void draw() {  //проверяем на ничью
-					 if(counter == 9 && label1->Text == "")
-					 {label1->Text = "DRAW";}
+        private: void select_button(System::Windows::Forms::Button^ button)
+        {
+                toggle_sign();
+                counter++;
+                write_sign_on_button(button);
+                int button_number = convert_button_to_number(button);
+                int button_remaining_index = convert_button_number_to_remaining_index(button_number);
+                delete_one_cell(button_remaining_index);
+
+                check_win();
+                check_draw();
+        }
+
+        private: int convert_button_number_to_remaining_index(int button_number)
+        {
+                for (int i = 0; i < remaining_cells; i++)
+                {
+                    if (array_of_cells[i] == button_number)
+                    {
+                        return i;
+                    }
+                }
+        }
+
+		private: void check_draw() {  
+                     bool is_game_unfinished = label1->Text == "";
+					 if(counter == 9 && is_game_unfinished)
+					    label1->Text = "DRAW";
 				 }
 
 		private: void line_win(System::Windows::Forms::Button^ button1, System::Windows::Forms::Button^ button2, System::Windows::Forms::Button^ button3){
 					 
 					if(button1->Text == button2->Text && button2->Text == button3->Text) 
 					 {
-						 if(button1->Text == "x") { label1->Text = "WIN X"; }
-						 else if(button1->Text == "o") { label1->Text = "WIN O";}
+						 if(button1->Text == "x") 
+                            label1->Text = "WIN X";
+						 else if(button1->Text == "o") 
+                            label1->Text = "WIN O";
 					 }
 				 }
 
@@ -372,20 +390,10 @@ namespace first {
 					 line_win(button3, button5, button7);
 				 }
 
-		private: void finish_game(System::Windows::Forms::Button^ button)
-				 {
-					  if(label1->Text != "") 
-					  counter = 100;
-					   if(counter != 100)
-							{
-								prevention_repeat_move(button);
-								check_win();
-							 }
-				 }
 
-
-		private: void restart(){
-
+		private: void restart()
+            {
+                 remaining_cells = 9;
 				 button1->Text = "";
 				 button2->Text = "";
 				 button3->Text = "";
@@ -396,179 +404,75 @@ namespace first {
 				 button8->Text = "";
 				 button9->Text = "";
 				 label1->Text = "";
-				 cross_or_zero = "";
+                 init_first_sign();
 				 counter = 0;
-				 }
+			}
+
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
 			 }
 	
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-
-				 if(play_with_pc == 0)
-					 {
-						finish_game(button1);
-					 }
-				else
-					 {
-				
-				  finish_game(button1);
-				 delete_one_cell(1);
-				 how_cells--;
-				 change_var();
-				 random_cell();		    //выбираем ячейку и удаляем из свободных
-				 switcher();
-					 }
-				 
+				 try_select_button(button1);
 			 }
+
     private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
-				 if(play_with_pc == 0)
-			 {
-				finish_game(button2);
-			 }
-			 else
-			 {
-				
-				  finish_game(button2);
-				 delete_one_cell(2);
-				 how_cells--;
-				 change_var();
-				 random_cell();		    //выбираем ячейку и удаляем из свободных
-				 switcher();
-			 }
-		 }
-	private: System::Void button10_Click(System::Object^  sender, System::EventArgs^  e) {
-				 restart();
-			 }
+				 try_select_button(button2);
+		    }
+
+    private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+			     try_select_button(button3);
+		     }
+    private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
+			     try_select_button(button4);
+		     }
+    private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
+			     try_select_button(button5);
+		     }
+    private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
+			     try_select_button(button6);
+		     }
+    private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {
+			     try_select_button(button7);
+		     }
+    private: System::Void button8_Click(System::Object^  sender, System::EventArgs^  e) {
+			     try_select_button(button8);
+		     }
+    private: System::Void button9_Click(System::Object^  sender, System::EventArgs^  e) {
+			     try_select_button(button9);
+		     }
+
+    private: System::Void button10_Click(System::Object^  sender, System::EventArgs^  e) {
+                restart();
+            }
 
 
-private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
-			 if(play_with_pc == 0)
-			 {
-				finish_game(button3);
-			 }
-			 else
-			 {
-				 
-				 finish_game(button3);
-				 delete_one_cell(3);
-				 how_cells--;
-				 change_var();
-				 random_cell();		    //выбираем ячейку и удаляем из свободных
-				 switcher();
-			 }
-		 }
-private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
-			 if(play_with_pc == 0)
-			 {
-				finish_game(button4);
-			 }
-			 else
-			 {
-				 
-				  finish_game(button4);
-				 delete_one_cell(4);
-				 how_cells--;
-				 change_var();
-				 random_cell();		    //выбираем ячейку и удаляем из свободных
-				 switcher();
-			 }
-		 }
-private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
-			 if(play_with_pc == 0)
-			 {
-				finish_game(button5);
-			 }
-			 else
-			 {
-				
-				 finish_game(button5);
-				 delete_one_cell(5);
-				 how_cells--;
-				 change_var();
-				 random_cell();		    //выбираем ячейку и удаляем из свободных
-				 switcher();
-			 }
-		 }
-private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
-			 if(play_with_pc == 0)
-			 {
-				finish_game(button6);
-			 }
-			 else
-			 {
-				
-				  finish_game(button6);
-				 delete_one_cell(6);
-				 how_cells--;
-				 change_var();
-				 random_cell();		    //выбираем ячейку и удаляем из свободных
-				 switcher();
-			 }
-		 }
-private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {
-			 if(play_with_pc == 0)
-			 {
-				finish_game(button7);
-			 }
-			 else
-			 {
-				 
-				 finish_game(button7);
-				 delete_one_cell(7);
-				 how_cells--;
-				 change_var();
-				 random_cell();		    //выбираем ячейку и удаляем из свободных
-				 switcher();
-			 }
-		 }
-private: System::Void button8_Click(System::Object^  sender, System::EventArgs^  e) {
-			 if(play_with_pc == 0)
-			 {
-				finish_game(button8);
-			 }
-			 else
-			 {
-				
-				 finish_game(button8);
-				 delete_one_cell(8);
-				 how_cells--;
-				 change_var();
-				 random_cell();		    //выбираем ячейку и удаляем из свободных
-				 switcher();
-			 }
-		 }
-private: System::Void button9_Click(System::Object^  sender, System::EventArgs^  e) {
-			 if(play_with_pc == 0)
-			 {
-				finish_game(button9);
-			 }
-			 else
-			 {
-				 finish_game(button9);
-				 delete_one_cell(9);
-				 how_cells--;
-				 change_var();
-				 random_cell();		    //выбираем ячейку и удаляем из свободных
-				 switcher();
-			 }
-		 }
+    private: System::Void button11_Click(System::Object^  sender, System::EventArgs^  e) {
+                 restart();
+                 initiate_pc_game();
+		    }
 
-private: System::Void button11_Click(System::Object^  sender, System::EventArgs^  e) {
+    private: void initiate_pc_game() {
+        array_of_cells = gcnew array<int>(9){ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        game_with_pc = true;
+        select_randomly_first_player();
+        if (is_pc_first_player)
+        {
+            select_random_cell();
+        }
+    }
 
-			 
-			 array_of_cells = gcnew array<int>(9){1,2,3,4,5,6,7,8,9};
-			 play_with_pc = 1;
-			 how_cells = 9;
-			 restart();
-			 random_first_pc();
-			
-			 if(first_player == 1)		
-			 {
-				 random_cell();		
-				 change_var();
-				 switcher();			
-				 
-			 }							
-		 }
-};
+    private: void select_randomly_first_player()
+        {
+            srand(time(NULL));
+            int i = rand() % 10;
+            if (i < 5) 
+            { 
+                is_pc_first_player = false;
+            }
+            else 
+            { 
+                is_pc_first_player = true; 
+            }
+        }
+    };
 }
