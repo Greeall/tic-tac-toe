@@ -228,6 +228,7 @@ namespace first {
 			this->button12->TabIndex = 12;
 			this->button12->Text = L"easy";
 			this->button12->UseVisualStyleBackColor = true;
+			this->button12->Click += gcnew System::EventHandler(this, &MyForm::button12_Click);
 			// 
 			// button13
 			// 
@@ -374,18 +375,42 @@ namespace first {
 					 bool is_game_unfinished = label1->Text == "";
 					 return is_game_unfinished;
 				 }
+
+		private: int check_level_of_game()
+		{
+			if(level_game>1)
+			{return 1;}
+			else{ return 0;}
+		}
+
         private: void try_select_button(System::Windows::Forms::Button^ button) 
-				 {                                                          
-                     bool is_it_finish = check_unfinished_game();
-                     if (is_it_finish && button->Text == "")
-					 {
-                         select_button(button);
-						 bool is_it_not_finish = check_unfinished_game();
-						 //there is will make check about level 
-                         if (game_with_pc && is_it_not_finish)
-                         select_random_cell();
-					 }
-				 }
+		 {                                                          
+                 bool is_it_finish = check_unfinished_game();
+                 if (is_it_finish && button->Text == "")
+				 {
+                       select_button(button);
+					   bool is_it_not_finish = check_unfinished_game();
+						 
+                       if (game_with_pc && is_it_not_finish)
+                       {
+						   int level_this_game = check_level_of_game();
+						   if(level_this_game == 1)
+						   {
+							   System::Windows::Forms::Button^ button_which_prevent_line = check_almost_ready_line();
+							   if (button_which_prevent_line)
+								 select_button(button_which_prevent_line);
+							   else
+								 select_random_cell();
+						   }
+						   else
+						   {
+							   select_random_cell();
+						   }
+					   }
+					 }     
+					 
+					
+		 }
 
         private: void select_button(System::Windows::Forms::Button^ button)
         {
@@ -399,7 +424,6 @@ namespace first {
 
                 check_win();
                 check_draw();
-
         }
 
         private: int convert_button_number_to_remaining_index(int button_number)
@@ -448,6 +472,7 @@ namespace first {
 
 		private: void restart()
             {
+				 array_of_cells = gcnew array<int>(9){ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
                  remaining_cells = 9;
 				 button1->Text = "";
 				 button2->Text = "";
@@ -463,75 +488,61 @@ namespace first {
 				 counter = 0;
 			}
 
-		private: void check_almost_ready_line(System::Windows::Forms::Button^ button){
+		private: System::Windows::Forms::Button^ check_almost_ready_line(){
 
-					 int number_button = convert_button_to_number(button);
-					 switch(number_button)
+					 System::Windows::Forms::Button^ button;
+					 for(int i=0; i<1; i++)
 					 {
-						 case (1):
-					 
-							if (button2->Text == button3->Text || button4->Text == button7->Text || button5->Text == button9->Text)
+							if ((button2->Text == button3->Text || button4->Text == button7->Text || button5->Text == button9->Text) && button1->Text == "")
 							{
-								select_button(button);
-							};
-							break;
-					 	 
-						 case (2):
-							if (button1->Text == button3->Text || button5->Text == button8->Text)
+								button = button1; break;
+							}
+							
+							if ((button1->Text == button3->Text || button5->Text == button8->Text) && button2->Text == "")
 							{
-								select_button(button);
-							};
-							break;
-						 case (3):
-							if (button1->Text == button2->Text || button5->Text == button7->Text || button6->Text == button9->Text)
+								button = button2; break;
+							}
+
+							if ((button1->Text == button2->Text || button5->Text == button7->Text || button6->Text == button9->Text) && button3->Text == "")
 							{
-								select_button(button);
-							};
-							break;
-						 case (4):
-							if (button1->Text == button7->Text || button5->Text == button6->Text)
+								button = button3; break;
+							}
+							
+						
+							if ((button1->Text == button7->Text || button5->Text == button6->Text) && button4->Text == "")
 							{
-								select_button(button);
-							};
-							break;
-						 case (5):
-							if (button1->Text == button9->Text || button3->Text == button7->Text || button2->Text == button8->Text || button4->Text == button6->Text)
+								button = button4; break;
+							}
+						
+						 
+							if ((button1->Text == button9->Text || button3->Text == button7->Text || button2->Text == button8->Text || button4->Text == button6->Text) && button5->Text == "")
 							{
-								select_button(button);
-							};
-							break;
-						 case (6):
-							if (button3->Text == button9->Text || button4->Text == button5->Text)
+								button = button5; break;
+							}
+							
+							if ((button3->Text == button9->Text || button4->Text == button5->Text) && button6->Text == "")
 							{
-								select_button(button);
-							};
-							break;
-						 case (7):
-							if (button1->Text == button4->Text || button8->Text == button9->Text || button3->Text == button5->Text)
+								button = button6; break;
+							}
+						 
+							if ((button1->Text == button4->Text || button8->Text == button9->Text || button3->Text == button5->Text) && button7->Text == "")
 							{
-								select_button(button);
-							};
-							break;
-					     case (8):
-							if (button8->Text == button9->Text || button2->Text == button5->Text)
+								button = button7; break;
+							}
+							
+							if ((button8->Text == button9->Text || button2->Text == button5->Text) && button8->Text == "")
 							{
-								select_button(button);
-							};
-							break;
-						 case (9):
-							if (button1->Text == button5->Text || button3->Text == button6->Text || button7->Text == button8->Text)
+								button = button8; break;
+							}
+						 
+							if ((button1->Text == button5->Text || button3->Text == button6->Text || button7->Text == button8->Text) && button9->Text == "")
 							{
-								select_button(button);
-							};
-							break;
+								button = button9; break;
+							}
 					 }
-					 
+					 return button;
 				 }
 
-
-	private: void play_with_middle_level(){
-
-			 }
 
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
 			 }
@@ -576,12 +587,19 @@ namespace first {
 
     private: System::Void button11_Click(System::Object^  sender, System::EventArgs^  e) {
                  restart();
-				 level_game = 1;
                  initiate_pc_game();
 		    }
 
+	private: System::Void button12_Click(System::Object^  sender, System::EventArgs^  e) {
+				 restart();
+				 level_game = 1; 
+				 initiate_pc_game();
+		 }
+
 	private: System::Void button13_Click(System::Object^  sender, System::EventArgs^  e) {
+				 restart();
 				 level_game = 2; 
+				 initiate_pc_game();
 			 }
 
 
@@ -592,6 +610,7 @@ namespace first {
 
     private: void initiate_pc_game() {
         array_of_cells = gcnew array<int>(9){ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		level_game = 1;
         game_with_pc = true;
         select_randomly_first_player();
         if (is_pc_first_player)
@@ -614,6 +633,7 @@ namespace first {
             }
         }
 	
+
 };
 }
 
