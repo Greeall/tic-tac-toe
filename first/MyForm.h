@@ -22,21 +22,16 @@ namespace first {
 		MyForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: äîáàâüòå êîä êîíñòðóêòîðà
-			//
-            this->current_sign = "";
+			
+			this->current_sign = "";
 			this->counter = 0;
 			this->game_with_pc = false;
 			this->remaining_cells = 9;
 			this->array_of_cells = gcnew array<int>(9){1,2,3,4,5,6,7,8,9};
-            this->init_first_sign();
+			this->init_first_sign();
 		}
 
 	protected:
-		/// <summary>
-		/// ывфывы
-		/// </summary>
 		~MyForm()
 		{
 			if (components)
@@ -48,7 +43,7 @@ namespace first {
 	protected: 
 
 	protected: 
-    protected: System::String^ current_sign;
+	protected: System::String^ current_sign;
 	private: System::Windows::Forms::Button^  button2;
 	protected: 
 	private: System::Windows::Forms::Button^  button3;
@@ -62,7 +57,7 @@ namespace first {
 	private: System::Windows::Forms::Label^  label1;
 	private: int counter;
 	private: bool game_with_pc;
-    private: bool is_pc_first_player;
+	private: bool is_pc_first_player;
 	private: int remaining_cells;
 	private: int level_game;
 	private: array<int>^ array_of_cells;  
@@ -71,14 +66,6 @@ namespace first {
 	private: System::Windows::Forms::Button^  button13;
 	private: System::Windows::Forms::Button^  button14;
 	private: System::Windows::Forms::Label^  label2;
-
-
-
-
-
-
-
-
 
 	private:
 		System::ComponentModel::Container ^components;
@@ -281,9 +268,9 @@ namespace first {
 		}
 #pragma endregion
 			
-		private: void delete_one_cell(int button_remaining_index)
+	private: void delete_one_cell(int button_remaining_index)
 				{
- 					for (int i = button_remaining_index; i<remaining_cells - 1; i++)
+					for (int i = button_remaining_index; i<remaining_cells - 1; i++)
 					{
 						array_of_cells[i] = array_of_cells[i+1];
 					}
@@ -304,62 +291,62 @@ namespace first {
 				}
 
         private: System::Windows::Forms::Button^ convert_button_remaining_index_to_button(int button_remaining_index)
-        		{
-                     System::Windows::Forms::Button^ button;
-                     int button_number = array_of_cells[button_remaining_index];
-                     switch (button_number)
-                     {
-                         case (1) : button = button1; break;
-                         case (2) : button = button2; break;
-                         case (3) : button = button3; break;
-                         case (4) : button = button4; break;
-                         case (5) : button = button5; break;
-                         case (6) : button = button6; break;
-                         case (7) : button = button7; break;
-                         case (8) : button = button8; break;
-                         case (9) : button = button9; break;
-                     }
-                     return button;
-        		}
+				{
+					System::Windows::Forms::Button^ button;
+					int button_number = array_of_cells[button_remaining_index];
+					switch (button_number)
+					{
+						case (1) : button = button1; break;
+						case (2) : button = button2; break;
+						case (3) : button = button3; break;
+						case (4) : button = button4; break;
+						case (5) : button = button5; break;
+						case (6) : button = button6; break;
+						case (7) : button = button7; break;
+						case (8) : button = button8; break;
+						case (9) : button = button9; break;
+					}
+					return button;
+				}
 
         private: int convert_button_to_number(System::Windows::Forms::Button^ button)
 				{
-                     if (button == button1)
-                         return 1;
-                     else if (button == button2)
-                         return 2;
-                     else if (button == button3)
-                         return 3;
-                     else if (button == button4)
-                         return 4;
-                     else if (button == button5)
-                         return 5;
-                     else if (button == button6)
-                         return 6;
-                     else if (button == button7)
-                         return 7;
-                     else if (button == button8)
-                         return 8;
-                     else if (button == button9)
-                         return 9;
+					if (button == button1)
+						return 1;
+					else if (button == button2)
+						return 2;
+					else if (button == button3)
+						return 3;
+					else if (button == button4)
+						return 4;
+					else if (button == button5)
+						return 5;
+					else if (button == button6)
+						return 6;
+					else if (button == button7)
+						return 7;
+					else if (button == button8)
+						return 8;
+					else if (button == button9)
+						return 9;
 				}
 
         private: void init_first_sign()
-        		{
-                     srand(time(NULL));
-                     if (rand() % 2)
-                         current_sign = "o";
-                     else
-                         current_sign = "x";
-        		}
+				{
+					srand(time(NULL));
+					if (rand() % 2)
+						current_sign = "o";
+					else
+						current_sign = "x";
+				}
 
         private: void toggle_sign()
 				{ 
-				    if(current_sign == "x") 
-                        current_sign = "o";
-				    else 
-                        current_sign = "x";
-        		}
+					if(current_sign == "x") 
+						current_sign = "o";
+					else 
+						current_sign = "x";
+				}
 	
 
 		private: bool check_unfinished_game()
@@ -533,92 +520,97 @@ namespace first {
 				 }
 
 
-	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
-			 }
+	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {}
 	
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
- 				try_select_button(button1);
-			 }
+					try_select_button(button1);
+				}
 
-    private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
- 				try_select_button(button2);
-		    }
+	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+					try_select_button(button2);
+				}
 
-    private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
-			     try_select_button(button3);
-		     }
-    private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
-			     try_select_button(button4);
-		     }
-    private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
-			     try_select_button(button5);
-		     }
-    private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
-			     try_select_button(button6);
-		     }
-    private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {
-			     try_select_button(button7);
-		     }
-    private: System::Void button8_Click(System::Object^  sender, System::EventArgs^  e) {
-			     try_select_button(button8);
-		     }
-    private: System::Void button9_Click(System::Object^  sender, System::EventArgs^  e) {
-			     try_select_button(button9);
-		     }
+	private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+			     		try_select_button(button3);
+		     		}
+				
+	private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
+			     		try_select_button(button4);
+		     		}
+				
+	private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
+			     		try_select_button(button5);
+		     		}
+				
+	private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
+			    		 try_select_button(button6);
+		     		}
+				
+	private: System::Void button7_Click(System::Object^  sender, System::EventArgs^  e) {
+			     		try_select_button(button7);
+		     		}
+				
+	private: System::Void button8_Click(System::Object^  sender, System::EventArgs^  e) {
+			     		try_select_button(button8);
+		     		}
+				
+	private: System::Void button9_Click(System::Object^  sender, System::EventArgs^  e) {
+			     		try_select_button(button9);
+		     		}
 
-    private: System::Void button10_Click(System::Object^  sender, System::EventArgs^  e) {
-                restart();
-            }
+	private: System::Void button10_Click(System::Object^  sender, System::EventArgs^  e) {
+					restart();
+				}
 
-    private: System::Void button11_Click(System::Object^  sender, System::EventArgs^  e) {
-                 restart();
-                 initiate_pc_game();
-		    }
+	private: System::Void button11_Click(System::Object^  sender, System::EventArgs^  e) {
+					restart();
+					initiate_pc_game();
+				}
 
 	private: System::Void button12_Click(System::Object^  sender, System::EventArgs^  e) {
-				 restart();
-				 level_game = 1; 
-				 initiate_pc_game();
-		 	}
+					 restart();
+					 level_game = 1; 
+					 initiate_pc_game();
+				}
 
 	private: System::Void button13_Click(System::Object^  sender, System::EventArgs^  e) {
-				 restart();
-				 level_game = 2; 
-				 initiate_pc_game();
-			 }
+					 restart();
+					 level_game = 2; 
+					 initiate_pc_game();
+ 				}
 
 
 	private: void check_level()
-			{
-
- 			}
-
-
-    private: void initiate_pc_game() 
-			{
-				array_of_cells = gcnew array<int>(9){ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-				level_game = 1;
-				game_with_pc = true;
-				select_randomly_first_player();
-				if (is_pc_first_player)
 				{
-					select_random_cell();
-				}
-			}
 
-    private: void select_randomly_first_player()
-			{
-				srand(time(NULL));
-				int i = rand() % 10;
-				if (i < 5) 
-				{ 
-					is_pc_first_player = false;
 				}
-				else 
-				{ 
-					is_pc_first_player = true; 
+
+
+	private: void initiate_pc_game() 
+				{
+					array_of_cells = gcnew array<int>(9){ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+					level_game = 1;
+					game_with_pc = true;
+					select_randomly_first_player();
+					if (is_pc_first_player)
+					{
+						select_random_cell();
+					}
 				}
-			}
+
+	private: void select_randomly_first_player()
+				{
+					srand(time(NULL));
+					int i = rand() % 10;
+					if (i < 5) 
+					{ 
+						is_pc_first_player = false;
+					}
+					else 
+					{ 
+						is_pc_first_player = true; 
+					}
+				}
 	};
 }
 
