@@ -81,16 +81,9 @@ namespace first {
 
 
 	private:
-		/// <summary>
-		/// Òðåáóåòñÿ ïåðåìåííàÿ êîíñòðóêòîðà.
-		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Îáÿçàòåëüíûé ìåòîä äëÿ ïîääåðæêè êîíñòðóêòîðà - íå èçìåíÿéòå
-		/// ñîäåðæèìîå äàííîãî ìåòîäà ïðè ïîìîùè ðåäàêòîðà êîäà.
-		/// </summary>
 		void InitializeComponent(void)
 		{
 			this->button1 = (gcnew System::Windows::Forms::Button());
@@ -290,28 +283,28 @@ namespace first {
 			
 		private: void delete_one_cell(int button_remaining_index)
 				{
-                    for (int i = button_remaining_index; i<remaining_cells - 1; i++)
-                    {
-                        array_of_cells[i] = array_of_cells[i+1];
-                    }
-                    remaining_cells--;
+ 					for (int i = button_remaining_index; i<remaining_cells - 1; i++)
+					{
+						array_of_cells[i] = array_of_cells[i+1];
+					}
+					remaining_cells--;
 				}
 
         private: void select_random_cell()
 				 {
 					 srand(time(NULL));
 					 int random_cell = rand() % remaining_cells;
-                     System::Windows::Forms::Button^ random_button = convert_button_remaining_index_to_button(random_cell);
-                     select_button(random_button);
+					 System::Windows::Forms::Button^ random_button = convert_button_remaining_index_to_button(random_cell);
+					 select_button(random_button);
 				 }
 
         private: void write_sign_on_button(System::Windows::Forms::Button^ button)
-				 {
-                     button->Text = current_sign;
-				 }
+				{
+ 					button->Text = current_sign;
+				}
 
         private: System::Windows::Forms::Button^ convert_button_remaining_index_to_button(int button_remaining_index)
-        {
+        		{
                      System::Windows::Forms::Button^ button;
                      int button_number = array_of_cells[button_remaining_index];
                      switch (button_number)
@@ -326,12 +319,11 @@ namespace first {
                          case (8) : button = button8; break;
                          case (9) : button = button9; break;
                      }
-
                      return button;
-        }
+        		}
 
         private: int convert_button_to_number(System::Windows::Forms::Button^ button)
-        {
+				{
                      if (button == button1)
                          return 1;
                      else if (button == button2)
@@ -350,112 +342,109 @@ namespace first {
                          return 8;
                      else if (button == button9)
                          return 9;
-        }
+				}
 
         private: void init_first_sign()
-        {
+        		{
                      srand(time(NULL));
                      if (rand() % 2)
                          current_sign = "o";
                      else
                          current_sign = "x";
-        }
+        		}
 
         private: void toggle_sign()
-        { 
+				{ 
 				    if(current_sign == "x") 
                         current_sign = "o";
 				    else 
                         current_sign = "x";
-        }
+        		}
 	
 
 		private: bool check_unfinished_game()
-				 {
-					 bool is_game_unfinished = label1->Text == "";
-					 return is_game_unfinished;
-				 }
+ 				{
+					bool is_game_unfinished = label1->Text == "";
+					return is_game_unfinished;
+				}
 
 		private: int check_level_of_game()
-		{
-			if(level_game>1)
-			{return 1;}
-			else{ return 0;}
-		}
+				{
+					if(level_game>1)
+					{return 1;}
+					else{ return 0;}
+				}
 
         private: void try_select_button(System::Windows::Forms::Button^ button) 
-		 {                                                          
-                 bool is_it_finish = check_unfinished_game();
-                 if (is_it_finish && button->Text == "")
-				 {
-                       select_button(button);
-					   bool is_it_not_finish = check_unfinished_game();
-						 
-                       if (game_with_pc && is_it_not_finish)
-                       {
-						   int level_this_game = check_level_of_game();
-						   if(level_this_game == 1)
-						   {
-							   System::Windows::Forms::Button^ button_which_prevent_line = check_almost_ready_line();
-							   if (button_which_prevent_line)
-								 select_button(button_which_prevent_line);
-							   else
-								 select_random_cell();
-						   }
-						   else
-						   {
-							   select_random_cell();
-						   }
-					   }
-					 }     
-					 
-					
-		 }
+				{                                                          
+					bool is_it_finish = check_unfinished_game();
+					if (is_it_finish && button->Text == "")
+					{
+						select_button(button);
+						bool is_it_not_finish = check_unfinished_game();
+
+						if (game_with_pc && is_it_not_finish)
+						{
+							int level_this_game = check_level_of_game();
+							if(level_this_game == 1)
+							{
+								System::Windows::Forms::Button^ button_which_prevent_line = check_almost_ready_line();
+								if (button_which_prevent_line)
+									select_button(button_which_prevent_line);
+								else
+									select_random_cell();
+								}
+							else
+							{
+								select_random_cell();
+							}
+						}
+					}     
+				}
 
         private: void select_button(System::Windows::Forms::Button^ button)
-        {
-                toggle_sign();
-                counter++;
-                write_sign_on_button(button);
-                int button_number = convert_button_to_number(button);
+				{
+					toggle_sign();
+					counter++;
+					write_sign_on_button(button);
+					int button_number = convert_button_to_number(button);
 
-                int button_remaining_index = convert_button_number_to_remaining_index(button_number);
-                delete_one_cell(button_remaining_index);
+					int button_remaining_index = convert_button_number_to_remaining_index(button_number);
+					delete_one_cell(button_remaining_index);
 
-                check_win();
-                check_draw();
-        }
+					check_win();
+					check_draw();
+				}
 
         private: int convert_button_number_to_remaining_index(int button_number)
+				{
+					for (int i = 0; i < remaining_cells; i++)
+					{
+						if (array_of_cells[i] == button_number)
+						{
+							return i;
+						}
+					}
+				}
 
-        {
-                for (int i = 0; i < remaining_cells; i++)
-                {
-                    if (array_of_cells[i] == button_number)
-                    {
-                        return i;
-                    }
-                }
-        }
 
+		private: void check_draw() 
+				{
+					bool is_game_unfinished = label1->Text == "";
+					if(counter == 9 && is_game_unfinished)
+						label1->Text = "DRAW";
+				}
 
-		private: void check_draw() {  
-
-                     bool is_game_unfinished = label1->Text == "";
-					 if(counter == 9 && is_game_unfinished)
-					    label1->Text = "DRAW";
-				 }
-
-		private: void line_win(System::Windows::Forms::Button^ button1, System::Windows::Forms::Button^ button2, System::Windows::Forms::Button^ button3){
-					 
+		private: void line_win(System::Windows::Forms::Button^ button1, System::Windows::Forms::Button^ button2, System::Windows::Forms::Button^ button3)
+				{
 					if(button1->Text == button2->Text && button2->Text == button3->Text) 
-					 {
-						 if(button1->Text == "x") 
-                            label1->Text = "WIN X";
-						 else if(button1->Text == "o") 
-                            label1->Text = "WIN O";
-					 }
-				 }
+					{
+						if(button1->Text == "x") 
+							label1->Text = "WIN X";
+						else if(button1->Text == "o") 
+							label1->Text = "WIN O";
+					}
+				}
 
 		private: void check_win()
 				 {
@@ -471,25 +460,25 @@ namespace first {
 
 
 		private: void restart()
-            {
-				 array_of_cells = gcnew array<int>(9){ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-                 remaining_cells = 9;
-				 button1->Text = "";
-				 button2->Text = "";
-				 button3->Text = "";
-				 button4->Text = "";
-				 button5->Text = "";
-				 button6->Text = "";
-				 button7->Text = "";
-				 button8->Text = "";
-				 button9->Text = "";
-				 label1->Text = "";
-                 init_first_sign();
-				 counter = 0;
-			}
+				{
+					 array_of_cells = gcnew array<int>(9){ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+					 remaining_cells = 9;
+					 button1->Text = "";
+					 button2->Text = "";
+					 button3->Text = "";
+					 button4->Text = "";
+					 button5->Text = "";
+					 button6->Text = "";
+					 button7->Text = "";
+					 button8->Text = "";
+					 button9->Text = "";
+					 label1->Text = "";
+					 init_first_sign();
+					 counter = 0;
+				}
 
-		private: System::Windows::Forms::Button^ check_almost_ready_line(){
-
+		private: System::Windows::Forms::Button^ check_almost_ready_line()
+				{
 					 System::Windows::Forms::Button^ button;
 					 for(int i=0; i<1; i++)
 					 {
@@ -548,12 +537,11 @@ namespace first {
 			 }
 	
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-
-				 try_select_button(button1);
+ 				try_select_button(button1);
 			 }
 
     private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
-				 try_select_button(button2);
+ 				try_select_button(button2);
 		    }
 
     private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -576,14 +564,11 @@ namespace first {
 		     }
     private: System::Void button9_Click(System::Object^  sender, System::EventArgs^  e) {
 			     try_select_button(button9);
-
-			
 		     }
 
     private: System::Void button10_Click(System::Object^  sender, System::EventArgs^  e) {
                 restart();
             }
-
 
     private: System::Void button11_Click(System::Object^  sender, System::EventArgs^  e) {
                  restart();
@@ -594,7 +579,7 @@ namespace first {
 				 restart();
 				 level_game = 1; 
 				 initiate_pc_game();
-		 }
+		 	}
 
 	private: System::Void button13_Click(System::Object^  sender, System::EventArgs^  e) {
 				 restart();
@@ -603,37 +588,37 @@ namespace first {
 			 }
 
 
-	private: void check_level(){
+	private: void check_level()
+			{
 
-			 }
+ 			}
 
 
-    private: void initiate_pc_game() {
-        array_of_cells = gcnew array<int>(9){ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-		level_game = 1;
-        game_with_pc = true;
-        select_randomly_first_player();
-        if (is_pc_first_player)
-        {
-            select_random_cell();
-        }
-    }
+    private: void initiate_pc_game() 
+			{
+				array_of_cells = gcnew array<int>(9){ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+				level_game = 1;
+				game_with_pc = true;
+				select_randomly_first_player();
+				if (is_pc_first_player)
+				{
+					select_random_cell();
+				}
+			}
 
     private: void select_randomly_first_player()
-        {
-            srand(time(NULL));
-            int i = rand() % 10;
-            if (i < 5) 
-            { 
-                is_pc_first_player = false;
-            }
-            else 
-            { 
-                is_pc_first_player = true; 
-            }
-        }
-	
-
-};
+			{
+				srand(time(NULL));
+				int i = rand() % 10;
+				if (i < 5) 
+				{ 
+					is_pc_first_player = false;
+				}
+				else 
+				{ 
+					is_pc_first_player = true; 
+				}
+			}
+	};
 }
 
