@@ -262,25 +262,25 @@ void InitializeComponent(void)
 	this->Controls->Add(this->label3); 
 	this->Controls->Add(this->label2); 
 	this->Controls->Add(this->button14); 
-this->Controls->Add(this->button13); 
-this->Controls->Add(this->button12); 
-this->Controls->Add(this->button11); 
-this->Controls->Add(this->label1); 
-this->Controls->Add(this->button10); 
-this->Controls->Add(this->button9); 
-this->Controls->Add(this->button8); 
-this->Controls->Add(this->button7); 
-this->Controls->Add(this->button6); 
-this->Controls->Add(this->button5); 
-this->Controls->Add(this->button4); 
-this->Controls->Add(this->button3); 
-this->Controls->Add(this->button2); 
-this->Controls->Add(this->button1); 
-this->Name = L"MyForm"; 
-this->Text = L"tic-tac"; 
-this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load); 
-this->ResumeLayout(false); 
-this->PerformLayout(); 
+	this->Controls->Add(this->button13); 
+	this->Controls->Add(this->button12); 
+	this->Controls->Add(this->button11); 
+	this->Controls->Add(this->label1); 
+	this->Controls->Add(this->button10); 
+	this->Controls->Add(this->button9); 
+	this->Controls->Add(this->button8); 
+	this->Controls->Add(this->button7); 
+	this->Controls->Add(this->button6); 
+	this->Controls->Add(this->button5); 
+	this->Controls->Add(this->button4); 
+	this->Controls->Add(this->button3); 
+	this->Controls->Add(this->button2); 
+	this->Controls->Add(this->button1); 
+	this->Name = L"MyForm"; 
+	this->Text = L"tic-tac"; 
+	this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load); 
+	this->ResumeLayout(false); 
+	this->PerformLayout(); 
 
 } 
 #pragma endregion 
@@ -434,7 +434,8 @@ private: int convert_button_number_to_remaining_index(int button_number)
 } 
 
 
-private: void check_draw() { 
+private: void check_draw() 
+{ 
 
 	bool is_game_unfinished = label1->Text == ""; 
 	if(counter == 9 && is_game_unfinished) 
@@ -483,6 +484,33 @@ private: void restart()
 	counter = 0; 
 } 
 
+private: bool replace_complex_if_for_two_comparisones(System::Windows::Forms::Button^ b1, 
+											 System::Windows::Forms::Button^ b7, 
+											 System::Windows::Forms::Button^ b5, 
+											 System::Windows::Forms::Button^ b6,
+											 System::Windows::Forms::Button^ bf)
+{
+	bool exist_line;
+	if (((b1->Text == b7->Text && b1->Text != "") || (b5->Text == b6->Text && b5->Text != "")) && bf->Text == "") 
+	exist_line = 1;
+	return exist_line;
+}
+
+
+private: bool replace_complex_if_for_three_comparisones(System::Windows::Forms::Button^ b1, 
+											   System::Windows::Forms::Button^ b5, 
+											   System::Windows::Forms::Button^ b3, 
+											   System::Windows::Forms::Button^ b6, 
+											   System::Windows::Forms::Button^ b7,
+											   System::Windows::Forms::Button^ b8,
+											   System::Windows::Forms::Button^ bf)
+{
+	bool exist_line;
+	if (((b1->Text == b5->Text && b1->Text != "") || (b3->Text == b6->Text && b3->Text != "") || (b7->Text == b8->Text && b7->Text != "")) && bf->Text == "") 
+	exist_line = 1;
+	return exist_line;
+}
+
 private: System::Windows::Forms::Button^ check_almost_ready_line(){ 
 
 	System::Windows::Forms::Button^ button; 
@@ -490,22 +518,30 @@ private: System::Windows::Forms::Button^ check_almost_ready_line(){
 	{ 
 		if (((button2->Text == button3->Text && button2->Text != "" )|| (button4->Text == button7->Text && button7->Text != "") || (button5->Text == button9->Text && button9->Text != "")) && button1->Text == "") 
 		{ 
+			bool three_part_line = replace_complex_if_for_three_comparisones(button2,button3,button4,button7,button5,button9,button1);
+			if(three_part_line)
 			button = button1; break; 
 		} 
 
 		if (((button1->Text == button3->Text && button1->Text != "" ) || (button5->Text == button8->Text && button5->Text != "")) && button2->Text == "") 
 		{ 
+			bool two_part_line = replace_complex_if_for_two_comparisones(button1,button3,button5,button8,button2);
+			if(two_part_line)
 			button = button2; break; 
 		} 
 
 		if (((button1->Text == button2->Text && button2->Text != "" )|| (button5->Text == button7->Text && button5->Text != "" ) || (button6->Text == button9->Text && button9->Text != "")) && button3->Text == "") 
 		{ 
+			bool three_part_line = replace_complex_if_for_three_comparisones(button1,button2,button5,button7,button6,button9,button3);
+			if(three_part_line)
 			button = button3; break; 
 		} 
 
 
 		if (((button1->Text == button7->Text && button1->Text != "") || (button5->Text == button6->Text && button5->Text != "")) && button4->Text == "") 
 		{ 
+			bool two_part_line = replace_complex_if_for_two_comparisones(button1,button7,button5,button6,button4);
+			if(two_part_line)
 			button = button4; break; 
 		} 
 
@@ -517,21 +553,29 @@ private: System::Windows::Forms::Button^ check_almost_ready_line(){
 
 		if (((button3->Text == button9->Text && button3->Text != "") || (button4->Text == button5->Text && button4->Text != "")) && button6->Text == "") 
 		{ 
+			bool two_part_line = replace_complex_if_for_two_comparisones(button3,button9,button3,button7,button6);
+			if(two_part_line)
 			button = button6; break; 
 		} 
 
 		if (((button1->Text == button4->Text && button1->Text != "") || (button8->Text == button9->Text && button8->Text != "") || (button3->Text == button5->Text && button3->Text != "")) && button7->Text == "") 
 		{ 
+			bool three_part_line = replace_complex_if_for_three_comparisones(button1,button4,button8,button9,button3,button5,button7);
+			if(three_part_line)
 			button = button7; break; 
 		} 
 
-		if (((button8->Text == button9->Text && button9->Text != "") || (button2->Text == button5->Text && button2->Text != "")) && button8->Text == "") 
+		if (((button7->Text == button9->Text && button7->Text != "") || (button2->Text == button5->Text && button2->Text != "")) && button8->Text == "") 
 		{ 
+			bool two_part_line = replace_complex_if_for_two_comparisones(button7,button9,button2,button5,button8);
+			if(two_part_line)
 			button = button8; break; 
 		} 
 
 		if (((button1->Text == button5->Text && button1->Text != "") || (button3->Text == button6->Text && button3->Text != "") || (button7->Text == button8->Text && button7->Text != "")) && button9->Text == "") 
 		{ 
+			bool three_part_line = replace_complex_if_for_three_comparisones(button1,button5,button3,button6,button7,button8,button9);
+			if(three_part_line)
 			button = button9; break; 
 		} 
 	} 

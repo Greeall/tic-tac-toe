@@ -1,11 +1,11 @@
-﻿Построение начато 24.03.2017 15:49:35.
+﻿Построение начато 24.03.2017 16:26:10.
      1>Проект "C:\Users\Середа\Documents\Visual Studio 2012\Projects\first\first\first.vcxproj" в узле 2 (целевые объекты Build).
      1>ClCompile:
          C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /AI"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /AI"C:\Program Files\Windows Kits\8.0\References\CommonConfiguration\Neutral" /Zi /clr /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm- /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib MyForm.cpp
          MyForm.cpp
      1>c:\users\середа\documents\visual studio 2012\projects\first\first\MyForm.h(299): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
      1>c:\users\середа\documents\visual studio 2012\projects\first\first\MyForm.h(353): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-     1>c:\users\середа\documents\visual studio 2012\projects\first\first\MyForm.h(612): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+     1>c:\users\середа\documents\visual studio 2012\projects\first\first\MyForm.h(656): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
      1>MyForm.cpp(8): warning C4829: Возможно, неправильные параметры функции main. Рекомендуемый вариант - "int main(Platform::Array<Platform::String^>^ argv)"
      1>c:\users\середа\documents\visual studio 2012\projects\first\first\myform.h(349): warning C4715: first::MyForm::convert_button_to_number: значение возвращается не при всех путях выполнения
      1>c:\users\середа\documents\visual studio 2012\projects\first\first\myform.h(434): warning C4715: first::MyForm::convert_button_number_to_remaining_index: значение возвращается не при всех путях выполнения
@@ -16,4 +16,4 @@
 
 Построение успешно завершено.
 
-Затраченное время: 00:00:05.71
+Затраченное время: 00:00:04.31
