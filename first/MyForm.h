@@ -71,6 +71,7 @@ namespace first {
 	private: System::Windows::Forms::Button^  button13;
 	private: System::Windows::Forms::Button^  button14;
 	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::Label^  label3;
 
 
 
@@ -109,6 +110,7 @@ namespace first {
 			this->button13 = (gcnew System::Windows::Forms::Button());
 			this->button14 = (gcnew System::Windows::Forms::Button());
 			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// button1
@@ -258,11 +260,21 @@ namespace first {
 			this->label2->TabIndex = 15;
 			this->label2->Text = L"select level";
 			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(175, 72);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(35, 13);
+			this->label3->TabIndex = 16;
+			this->label3->Text = L"label3";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(285, 262);
+			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->button14);
 			this->Controls->Add(this->button13);
@@ -378,9 +390,13 @@ namespace first {
 
 		private: int check_level_of_game()
 		{
+			int level;
 			if(level_game>1)
-			{return 1;}
-			else{ return 0;}
+			{level = 1;}
+			else
+			{level = 0;}
+			return level;
+			
 		}
 
         private: void try_select_button(System::Windows::Forms::Button^ button) 
@@ -389,16 +405,21 @@ namespace first {
                  if (is_it_finish && button->Text == "")
 				 {
                        select_button(button);
-					   bool is_it_not_finish = check_unfinished_game();
-						 
-                       if (game_with_pc && is_it_not_finish)
+                       if (game_with_pc)
                        {
 						   int level_this_game = check_level_of_game();
-						   if(level_this_game == 1)
+						   if(level_game>1)
 						   {
 							   System::Windows::Forms::Button^ button_which_prevent_line = check_almost_ready_line();
+							  // label3->Text = Convert::ToString(button_which_prevent_line->Name);
 							   if (button_which_prevent_line)
-								 select_button(button_which_prevent_line);
+								  { 
+									  int a = convert_button_to_number(button_which_prevent_line);
+
+									 
+									  
+									 select_button(button_which_prevent_line);
+								  }
 							   else
 								 select_random_cell();
 						   }
@@ -493,49 +514,49 @@ namespace first {
 					 System::Windows::Forms::Button^ button;
 					 for(int i=0; i<1; i++)
 					 {
-							if ((button2->Text == button3->Text || button4->Text == button7->Text || button5->Text == button9->Text) && button1->Text == "")
+							if (((button2->Text == button3->Text && button2->Text != ""  )|| (button4->Text == button7->Text && button7->Text != "") || (button5->Text == button9->Text && button9->Text != "")) && button1->Text == "")
 							{
 								button = button1; break;
 							}
 							
-							if ((button1->Text == button3->Text || button5->Text == button8->Text) && button2->Text == "")
+							if (((button1->Text == button3->Text && button1->Text != "" ) || (button5->Text == button8->Text && button5->Text != "")) && button2->Text == "")
 							{
 								button = button2; break;
 							}
 
-							if ((button1->Text == button2->Text || button5->Text == button7->Text || button6->Text == button9->Text) && button3->Text == "")
+							if (((button1->Text == button2->Text && button2->Text != "" )|| (button5->Text == button7->Text && button5->Text != "" ) || (button6->Text == button9->Text && button9->Text != "")) && button3->Text == "")
 							{
 								button = button3; break;
 							}
 							
 						
-							if ((button1->Text == button7->Text || button5->Text == button6->Text) && button4->Text == "")
+							if (((button1->Text == button7->Text && button1->Text != "") || (button5->Text == button6->Text && button5->Text != "")) && button4->Text == "")
 							{
 								button = button4; break;
 							}
 						
 						 
-							if ((button1->Text == button9->Text || button3->Text == button7->Text || button2->Text == button8->Text || button4->Text == button6->Text) && button5->Text == "")
+							if (((button1->Text == button9->Text && button9->Text != "")|| (button3->Text == button7->Text && button3->Text != "") || (button2->Text == button8->Text && button2->Text != "") || (button4->Text == button6->Text && button6->Text != "")) && button5->Text == "")
 							{
 								button = button5; break;
 							}
 							
-							if ((button3->Text == button9->Text || button4->Text == button5->Text) && button6->Text == "")
+							if (((button3->Text == button9->Text && button3->Text != "") || (button4->Text == button5->Text && button4->Text != "")) && button6->Text == "")
 							{
 								button = button6; break;
 							}
 						 
-							if ((button1->Text == button4->Text || button8->Text == button9->Text || button3->Text == button5->Text) && button7->Text == "")
+							if (((button1->Text == button4->Text && button1->Text != "") || (button8->Text == button9->Text && button8->Text != "") || (button3->Text == button5->Text && button3->Text != "")) && button7->Text == "")
 							{
 								button = button7; break;
 							}
 							
-							if ((button8->Text == button9->Text || button2->Text == button5->Text) && button8->Text == "")
+							if (((button8->Text == button9->Text && button9->Text != "") || (button2->Text == button5->Text && button2->Text != "")) && button8->Text == "")
 							{
 								button = button8; break;
 							}
 						 
-							if ((button1->Text == button5->Text || button3->Text == button6->Text || button7->Text == button8->Text) && button9->Text == "")
+							if (((button1->Text == button5->Text && button1->Text != "") || (button3->Text == button6->Text && button3->Text != "") || (button7->Text == button8->Text && button7->Text != "")) && button9->Text == "")
 							{
 								button = button9; break;
 							}
@@ -587,6 +608,7 @@ namespace first {
 
     private: System::Void button11_Click(System::Object^  sender, System::EventArgs^  e) {
                  restart();
+				 level_game = 1; 
                  initiate_pc_game();
 		    }
 
@@ -603,14 +625,8 @@ namespace first {
 			 }
 
 
-	private: void check_level(){
-
-			 }
-
-
     private: void initiate_pc_game() {
         array_of_cells = gcnew array<int>(9){ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-		level_game = 1;
         game_with_pc = true;
         select_randomly_first_player();
         if (is_pc_first_player)
