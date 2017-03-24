@@ -491,7 +491,9 @@ private: bool replace_complex_if_of_two_comparisones(System::Windows::Forms::But
 											 System::Windows::Forms::Button^ bf)
 {
 	if (((b1->Text == b7->Text && b1->Text != "") || (b5->Text == b6->Text && b5->Text != "")) && bf->Text == "") 
-	return 1;
+	return true;
+	else 
+	return false;
 }
 
 
@@ -504,7 +506,9 @@ private: bool replace_complex_if_of_three_comparisones(System::Windows::Forms::B
 											   System::Windows::Forms::Button^ bf)
 {
 	if (((b1->Text == b5->Text && b1->Text != "") || (b3->Text == b6->Text && b3->Text != "") || (b7->Text == b8->Text && b7->Text != "")) && bf->Text == "") 
-	return 1;
+	return true;
+	else 
+	return false;
 }
 
 private: System::Windows::Forms::Button^ check_almost_ready_line(){ 
@@ -514,19 +518,19 @@ private: System::Windows::Forms::Button^ check_almost_ready_line(){
 	{ 
 		 
 		bool three_part_line = replace_complex_if_of_three_comparisones(button2,button3,button4,button7,button5,button9,button1);
-		if(three_part_line == 1)
+		if(three_part_line)
 		{button = button1; break; }
 
 		bool two_part_line = replace_complex_if_of_two_comparisones(button1,button3,button5,button8,button2);
-		if(two_part_line == 1)
+		if(two_part_line)
 		{button = button2; break; }
 
 		three_part_line = replace_complex_if_of_three_comparisones(button1,button2,button5,button7,button6,button9,button3);
-		if(three_part_line == 1)
+		if(three_part_line)
 		{button = button3; break; }
 
 		two_part_line = replace_complex_if_of_two_comparisones(button1,button7,button5,button6,button4);
-		if(two_part_line == 1)
+		if(two_part_line)
 		{button = button4; break; }
 
 		if (((button1->Text == button9->Text && button9->Text != "")|| (button3->Text == button7->Text && button3->Text != "") || (button2->Text == button8->Text && button2->Text != "") || (button4->Text == button6->Text && button6->Text != "")) && button5->Text == "") 
@@ -535,19 +539,19 @@ private: System::Windows::Forms::Button^ check_almost_ready_line(){
 		} 
 
 		two_part_line = replace_complex_if_of_two_comparisones(button3,button9,button3,button7,button6);
-		if(two_part_line == 1)
+		if(two_part_line)
 		{button = button6; break; }
 	
 		three_part_line = replace_complex_if_of_three_comparisones(button1,button4,button8,button9,button3,button5,button7);
-		if(three_part_line == 1)
+		if(three_part_line)
 		{button = button7; break;} 
 
 		two_part_line = replace_complex_if_of_two_comparisones(button7,button9,button2,button5,button8);
-		if(two_part_line == 1)
+		if(two_part_line)
 		{button = button8; break; }
 		
 		three_part_line = replace_complex_if_of_three_comparisones(button1,button5,button3,button6,button7,button8,button9);
-		if(three_part_line == 1)
+		if(three_part_line)
 		{button = button9; break; }
 	} 
 	return button; 
