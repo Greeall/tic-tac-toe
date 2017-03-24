@@ -384,11 +384,11 @@ private: int check_level_of_game()
 
 private: void try_select_button(System::Windows::Forms::Button^ button) 
 { 
-	bool is_it_finish = check_unfinished_game(); 
-	if (is_it_finish && button->Text == "") 
+	bool isnt_it_finish = check_unfinished_game(); 
+	if (isnt_it_finish && button->Text == "") 
 	{ 
 		select_button(button); 
-		if (game_with_pc) 
+		if (game_with_pc && remaining_cells != 0) 
 		{ 
 			int level_this_game = check_level_of_game(); 
 			if(level_game>1) 
