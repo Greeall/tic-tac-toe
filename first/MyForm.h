@@ -238,6 +238,7 @@ void InitializeComponent(void)
 	this->button14->TabIndex = 14;
 	this->button14->Text = L"hard";
 	this->button14->UseVisualStyleBackColor = true;
+	this->button14->Click += gcnew System::EventHandler(this, &MyForm::button14_Click);
 	// 
 	// label2
 	// 
@@ -379,9 +380,28 @@ private: void try_select_button(System::Windows::Forms::Button^ button)
 					select_button(button_which_prevent_line); 
 				} 
 				else 
-				select_random_cell(); 
+					select_random_cell(); 
 			} 
-			else 
+			else if(level_game == HARD_LEVEL)
+			{
+				System::Windows::Forms::Button^ button_which_end_pc_line = check_almost_ready_pc_line();
+				if(button_which_end_pc_line)
+				{
+					 label1->Text = "sdsdfsdf";
+					 select_button(button_which_end_pc_line); 
+				}
+				else 
+				{
+					System::Windows::Forms::Button^ button_which_prevent_line = check_almost_ready_line(); 
+					if (button_which_prevent_line) 
+					{ 
+						select_button(button_which_prevent_line); 
+					} 
+					else 
+						select_random_cell(); 
+				}
+			}
+			else
 			{ 
 				select_random_cell(); 
 			} 
@@ -389,13 +409,14 @@ private: void try_select_button(System::Windows::Forms::Button^ button)
 	} 
 } 
 
+
 private: void select_button(System::Windows::Forms::Button^ button) 
 { 
 	toggle_sign(); 
 	counter++; 
 	write_sign_on_button(button); 
 	int button_number = convert_button_to_number(button); 
-	int button_remaining_index = convert_button_number_to_remaining_index(button_number); 
+	int button_remaining_index = convert_button_number_to_remaining_index(convert_button_to_number(button)); 
 	delete_one_cell(button_remaining_index); 
 	check_win(); 
 	check_draw(); 
@@ -471,6 +492,41 @@ private: bool is_button_in_line(System::Windows::Forms::Button^ button1, System:
 	return (button1->Text == button2->Text && button1->Text != "");
 }
 
+private: bool is_button_in_pc_line(System::Windows::Forms::Button^ button1, System::Windows::Forms::Button^ button2)
+{
+	return (button1->Text == button2->Text && button1->Text == current_sign);
+}
+
+private: System::Windows::Forms::Button^ check_almost_ready_pc_line()
+{
+		if((is_button_in_pc_line(button2,button3) || is_button_in_pc_line(button4,button7) || is_button_in_pc_line(button9,button5)) && is_button_empty(button1))
+			return button1; 
+
+		if((is_button_in_pc_line(button1,button3) || is_button_in_pc_line(button8,button5)) && is_button_empty(button2))
+			return button2;
+
+		if((is_button_in_pc_line(button1,button2) || is_button_in_pc_line(button7,button5) || is_button_in_pc_line(button6,button9)) && is_button_empty(button3))
+			return button3;
+
+		if((is_button_in_pc_line(button1,button7) || is_button_in_pc_line(button5,button6)) && is_button_empty(button4))
+			return button4;
+
+		if ((is_button_in_pc_line(button1,button9) || is_button_in_pc_line(button7,button3) || is_button_in_pc_line(button2,button8) || is_button_in_pc_line(button4,button6)) && is_button_empty(button5))  
+			return button5;
+		
+		if((is_button_in_pc_line(button3,button9) || is_button_in_pc_line(button4,button5)) && is_button_empty(button6))
+			return button6;
+	
+		if((is_button_in_pc_line(button1,button4) || is_button_in_pc_line(button8,button9) || is_button_in_pc_line(button3,button5)) && is_button_empty(button7))
+			return button7; 
+
+		if((is_button_in_pc_line(button7,button9) || is_button_in_pc_line(button2,button5)) && is_button_empty(button8))
+			return button8;
+		
+		if((is_button_in_pc_line(button1,button5) || is_button_in_pc_line(button3,button6) || is_button_in_pc_line(button7,button8)) && is_button_empty(button9))
+			return button9;
+}
+
 private: System::Windows::Forms::Button^ check_almost_ready_line(){ 
 
 		if((is_button_in_line(button2,button3) || is_button_in_line(button4,button7) || is_button_in_line(button9,button5)) && is_button_empty(button1))
@@ -498,7 +554,7 @@ private: System::Windows::Forms::Button^ check_almost_ready_line(){
 			return button8;
 		
 		if((is_button_in_line(button1,button5) || is_button_in_line(button3,button6) || is_button_in_line(button7,button8)) && is_button_empty(button9))
-			return button8;
+			return button9;
 } 
 
 
@@ -559,6 +615,12 @@ private: System::Void button13_Click(System::Object^ sender, System::EventArgs^ 
 	initiate_pc_game(); 
 } 
 
+private: System::Void button14_Click(System::Object^  sender, System::EventArgs^  e) {
+	restart(); 
+	level_game = HARD_LEVEL; 
+	initiate_pc_game(); 
+}
+
 
 private: void initiate_pc_game() { 
 	array_of_cells = gcnew array<int>(9){ 1, 2, 3, 4, 5, 6, 7, 8, 9 }; 
@@ -583,7 +645,6 @@ private: void select_randomly_first_player()
 		is_pc_first_player = true; 
 	} 
 } 
-
 
 }; 
 }
