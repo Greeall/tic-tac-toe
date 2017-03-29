@@ -342,21 +342,16 @@ private: int convert_button_to_number(System::Windows::Forms::Button^ button)
 	return 9; 
 } 
 
+
 private: void init_first_sign() 
 { 
 	srand(time(NULL)); 
-	if (rand() % 2) 
-		current_sign = "o"; 
-	else 
-		current_sign = "x"; 
+	rand()%2 ? current_sign = "o" : current_sign = "x"; 
 } 
 
 private: void toggle_sign() 
 { 
-	if(current_sign == "x") 
-		current_sign = "o"; 
-	else 
-		current_sign = "x"; 
+	current_sign == "x" ? current_sign = "o" : current_sign = "x";
 } 
 
 
@@ -370,7 +365,7 @@ private: void try_select_button(System::Windows::Forms::Button^ button)
 	if (is_game_finish() && is_button_empty(button)) 
 	{ 
 		select_button(button); 
-		if (game_with_pc && remaining_cells != 0) 
+		if (game_with_pc && remaining_cells != 0 && label1->Text == "") 
 		{ 
 			if(level_game == MEDIUM_LEVEL) 
 			{ 
@@ -387,7 +382,6 @@ private: void try_select_button(System::Windows::Forms::Button^ button)
 				System::Windows::Forms::Button^ button_which_end_pc_line = check_almost_ready_pc_line();
 				if(button_which_end_pc_line)
 				{
-					 label1->Text = "sdsdfsdf";
 					 select_button(button_which_end_pc_line); 
 				}
 				else 
@@ -412,9 +406,9 @@ private: void try_select_button(System::Windows::Forms::Button^ button)
 
 private: void select_button(System::Windows::Forms::Button^ button) 
 { 
-	toggle_sign(); 
 	counter++; 
 	write_sign_on_button(button); 
+	toggle_sign(); 
 	int button_number = convert_button_to_number(button); 
 	int button_remaining_index = convert_button_number_to_remaining_index(convert_button_to_number(button)); 
 	delete_one_cell(button_remaining_index); 
@@ -442,13 +436,14 @@ private: void check_draw()
 
 private: void line_win(System::Windows::Forms::Button^ button1, System::Windows::Forms::Button^ button2, System::Windows::Forms::Button^ button3){ 
 
-	if(button1->Text == button2->Text && button2->Text == button3->Text) 
+
+	if(is_button_in_line(button1,button2) && is_button_in_line(button2,button3))
 	{ 
 		if(button1->Text == "x") 
 			label1->Text = "WIN X"; 
 		else if(button1->Text == "o") 
 			label1->Text = "WIN O"; 
-	} 
+	}
 } 
 
 private: void check_win() 
@@ -626,24 +621,15 @@ private: void initiate_pc_game() {
 	array_of_cells = gcnew array<int>(9){ 1, 2, 3, 4, 5, 6, 7, 8, 9 }; 
 	game_with_pc = true; 
 	select_randomly_first_player(); 
-	if (is_pc_first_player) 
-	{ 
+	if (is_pc_first_player)  
 		select_random_cell(); 
-	} 
 } 
 
 private: void select_randomly_first_player() 
 { 
 	srand(time(NULL)); 
 	int i = rand() % 10; 
-	if (i < 5) 
-	{ 
-		is_pc_first_player = false; 
-	} 
-	else 
-	{ 
-		is_pc_first_player = true; 
-	} 
+	i < 5 ? is_pc_first_player = false : is_pc_first_player = true; 
 } 
 
 }; 
